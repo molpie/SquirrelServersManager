@@ -10,7 +10,7 @@ RUN npm install -g npm@11.3.0
 RUN rm -f /usr/lib/python3.12/EXTERNALLY-MANAGED
 RUN pip install ansible-runner \
     ansible-runner-http
-RUN npm install -g typescript
+RUN npm install -g typescript@5.8.3
 RUN npm i -g @nestjs/cli
 COPY ./package*.json .
 COPY ./tsconfig.json .

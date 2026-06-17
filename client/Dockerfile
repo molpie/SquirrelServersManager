@@ -5,7 +5,7 @@ LABEL org.opencontainers.image.licenses="GNU AFFERO GENERAL PUBLIC LICENSE"
 
 WORKDIR /opt/squirrelserversmanager/client
 RUN npm install -g npm@11.3.0
-RUN npm install -g typescript
+RUN npm install -g typescript@5.8.3
 COPY ./package*.json .
 COPY ./tsconfig.json .
 RUN mkdir /opt/squirrelserversmanager/shared-lib
