@@ -12,12 +12,20 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          ref: release
+          ref: master
+          fetch-depth: 0
       - name: Reset promotion branch
         run: |
-          git fetch origin master:master
-          git reset --hard master
+          git fetch origin --prune
+          if git ls-remote --exit-code --heads origin release >/dev/null 2>&1; then
+            git checkout -B release origin/release
+            git reset --hard origin/master
+          else
+            echo "Branch 'release' non trovato su origin: salto creazione PR."
+            echo "skip_pr=true" >> $GITHUB_ENV
+          fi
       - name: Create pull request
+        if: env.skip_pr != 'true'
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -25,3 +33,4 @@ jobs:
           title: '[CHORE] Create PR from master to release'
           body: 'The workflow is triggered by publishing a new tag. This PR merges changes from master to release.'
           branch: 'master-to-release'
+          base: 'release'
