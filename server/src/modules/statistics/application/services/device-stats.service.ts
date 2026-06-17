@@ -86,7 +86,11 @@ export class DeviceStatsService implements IDeviceStatsService {
         return null;
       }
 
-      return result.data;
+      const deviceNameMap = new Map(devices.map((d) => [d.uuid, d.fqdn || d.hostname || d.uuid]));
+      return result.data.map((item) => ({
+        ...item,
+        name: deviceNameMap.get(item.name) ?? item.name,
+      }));
     } catch (error) {
       this.logger.error(error, 'Error getting stats for multiple devices');
       return null;
@@ -128,7 +132,11 @@ export class DeviceStatsService implements IDeviceStatsService {
         return null;
       }
 
-      return result.data;
+      const deviceNameMap = new Map(devices.map((d) => [d.uuid, d.fqdn || d.hostname || d.uuid]));
+      return result.data.map((item) => ({
+        ...item,
+        name: deviceNameMap.get(item.name) ?? item.name,
+      }));
     } catch (error) {
       this.logger.error(error, 'Error getting averaged stats for multiple devices');
       return null;
