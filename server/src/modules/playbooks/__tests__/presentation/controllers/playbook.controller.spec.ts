@@ -81,7 +81,7 @@ describe('PlaybookController', () => {
         if (!playbook) {
           throw new Error('Playbook not found');
         }
-        return mockPlaybookFileService.editPlaybook(playbook.path, updateData.content);
+        return mockPlaybookFileService.editPlaybook(updateData.content, playbook.path);
       },
 
       deletePlaybook: async (uuid: string) => {
@@ -196,8 +196,8 @@ describe('PlaybookController', () => {
       const result = await controller.editPlaybook('playbook-uuid', updateData);
       expect(mockPlaybookRepository.findOneByUuid).toHaveBeenCalledWith('playbook-uuid');
       expect(mockPlaybookFileService.editPlaybook).toHaveBeenCalledWith(
-        mockPlaybook.path,
         updateData.content,
+        mockPlaybook.path,
       );
       expect(result).toEqual({ success: true });
     });

@@ -56,7 +56,7 @@ export class PlaybooksController {
       throw new Error('Playbook not found');
     }
 
-    return this.playbookFileService.editPlaybook(playbook.path, updateData.content);
+    return this.playbookFileService.editPlaybook(updateData.content, playbook.path);
   }
 
   @DeletePlaybookDoc()
