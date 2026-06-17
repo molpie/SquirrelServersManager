@@ -17,7 +17,7 @@ services:
   prometheus:
     build:
       context: ./prometheus  # Directory containing Dockerfile and prometheus.yml
-    container_name: prometheus-ssm
+    container_name: dev-prometheus-ssm
     restart: unless-stopped
     env_file:
       - ./.env.dev
@@ -30,7 +30,7 @@ services:
   mongo:
     env_file:
       - ./.env.dev
-    container_name: mongo
+    container_name: dev-mongo-ssm
     image: mongo
     restart: unless-stopped
     volumes:
@@ -42,7 +42,7 @@ services:
       wud.display.name: "SSM - MongoDB"
       wud.watch.digest: false
   redis:
-    container_name: cache-ssm
+    container_name: dev-cache-ssm
     image: redis
     restart: unless-stopped
     volumes:
