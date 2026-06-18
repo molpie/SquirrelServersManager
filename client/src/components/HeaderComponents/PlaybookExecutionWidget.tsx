@@ -112,7 +112,7 @@ const PlaybookExecutionWidget: React.FC = () => {
       notification.open({
         key: 'notification-failed',
         message: 'The playbook execution failed',
-        duration: 0,
+        duration: 10,
         description: (
           <Typography.Paragraph>
             <b>Probable cause</b>: {payload.cause}
